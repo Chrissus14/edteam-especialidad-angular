@@ -8,6 +8,7 @@ import { FiltroPipe } from './filtro.pipe';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { CoursesComponent } from './courses/courses.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     FiltroPipe,
     NavbarComponent,
     SidenavComponent,
-    DashboardComponent
+    DashboardComponent,
+    CoursesComponent
   ],
   imports: [
     BrowserModule,

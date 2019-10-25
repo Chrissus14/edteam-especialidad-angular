@@ -21,22 +21,22 @@ export class CourseActionComponent implements OnInit {
   ngOnInit() {
   }
 
-  editarCurso(curso: Curso){
+  editarCurso(curso: Curso) {
     console.log('Edit', curso);
-    //Propagando el objeto curso hacia el componente padre
+    // Propagando el objeto curso hacia el componente padre
     this.edit.emit(curso);
   }
 
-  eliminarCurso(curso: Curso){
+  eliminarCurso(curso: Curso) {
     console.log('Eliminar', curso);
     this.delete.emit(curso);
   }
 
-  onMouseOver(event: any){
+  onMouseOver(event: any) {
     console.log('Mouse Over', event);
   }
 
-  onDobleClick(event: any){
+  onDobleClick(event: any) {
     console.log('Doble Click', event);
   }
 

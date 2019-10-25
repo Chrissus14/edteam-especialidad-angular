@@ -9,24 +9,25 @@ import { CourseEditComponent } from './course-edit/course-edit.component';
 
 const routes: Routes = [
   {
-    path: 'dashboard', //localhost:4200/dashboard
+    path: '',
+    redirectTo: 'courses',
+    pathMatch: 'full'
+  },
+  {
+    path: 'dashboard', // localhost:4200/dashboard
     component: DashboardComponent
   },
   {
-    path: 'navbar', 
-    component: NavbarComponent
+    path: 'navbar', component: NavbarComponent
   },
   {
-    path: 'sidenav', 
-    component: SidenavComponent
+    path: 'sidenav', component: SidenavComponent
   },
   {
-    path: 'courses', 
-    component: CoursesComponent
+    path: 'courses', component: CoursesComponent
   },
   {
-    path: 'courses/:id', 
-    component: CourseEditComponent
+    path: 'courses/:id', component: CourseEditComponent
   },
 ];
 

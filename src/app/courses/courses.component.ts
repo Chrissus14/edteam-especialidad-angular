@@ -2,6 +2,8 @@ import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angula
 import { Curso } from '../curso';
 import { Router } from '@angular/router';
 import { CoursesService } from '../courses.service';
+import { catchError, tap } from 'rxjs/operators';
+import { of, EMPTY } from 'rxjs';
 
 @Component({
   selector: 'ed-courses',
@@ -12,7 +14,7 @@ export class CoursesComponent implements OnInit, AfterViewInit {
 
   titulo = 'Lista de cursos';
   anchoImagen = '40px';
-  @ViewChild('filtro', {static: false})
+  @ViewChild('filtro', { static: false })
   filtro: ElementRef;
   private _textoFiltro: string;
 
@@ -20,26 +22,45 @@ export class CoursesComponent implements OnInit, AfterViewInit {
     this._textoFiltro = t;
 
     // filtrar cursos
-    this.cursos = t ? this.filtrarCursos(t) : this.coursesService.getCursos();
+    this.filtrarCursos(t);
+    // this.cursos = t ? this.filtrarCursos(t) : this.coursesService.getCursos();
   }
 
   get textoFiltro() {
     return this._textoFiltro;
   }
   cursos: Curso[];
+  cursosFiltrados: Curso[];
+  mensajeError: string;
 
-  constructor(private router: Router, private coursesService: CoursesService) {  }
+  constructor(private router: Router, private coursesService: CoursesService) { }
 
   ngOnInit() {
-    this.cursos = this.coursesService.getCursos();
-   }
+    // this.cursos = this.coursesService.getCursos();
+    this.getCursos();
+  }
+
+  getCursos() {
+    this.coursesService.getCursos()
+      .pipe(
+        tap(cursos => console.log('Cursos: ', cursos)),
+        catchError(error => {
+          this.mensajeError = error;
+          return EMPTY;
+        })
+      )
+      .subscribe((cursos: Curso[]) => {
+        this.cursos = cursos;
+        this.cursosFiltrados = cursos;
+      })
+  }
 
   ngAfterViewInit() {
-    this.filtro.nativeElement.value = 'Angular';
+    // this.filtro.nativeElement.value = 'Angular';
   }
 
   filtrarCursos(texto: string) {
-    return this.cursos.filter((curso: Curso) => curso.name.toLowerCase().indexOf(texto.toLowerCase()) >= 0 );
+    this.cursosFiltrados = this.cursos.filter((curso: Curso) => curso.name.toLowerCase().indexOf(texto.toLowerCase()) >= 0);
   }
 
   onEditCurso(curso: Curso) {

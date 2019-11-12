@@ -5,6 +5,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { CoursesComponent } from './courses/courses.component';
 import { CourseEditComponent } from './course-edit/course-edit.component';
+import { CourseAddComponent } from './course-add/course-add.component';
 
 
 const routes: Routes = [
@@ -27,8 +28,11 @@ const routes: Routes = [
     path: 'courses', component: CoursesComponent
   },
   {
-    path: 'courses/:id', component: CourseEditComponent
+    path: 'courses/edit/:id', component: CourseEditComponent
   },
+  {
+    path: 'courses/add', component: CourseAddComponent
+  }
 ];
 
 @NgModule({
